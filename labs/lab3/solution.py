@@ -114,9 +114,12 @@ if __name__ == "__main__":
     # Task 2d: Measure the CPU usage of the "UPF1" pod.
     # This query has been pre-filled for you. Just uncomment the code below and run it.
     # 
-    query = 'rate(container_cpu_usage_seconds_total{pod=~".*upf1.*", container!=""}[1m])'
+    #query = 'rate(container_cpu_usage_seconds_total{pod=~".*upf1.*",container!=""}[1m])'
+    query = 'rate(container_cpu_usage_seconds_total{pod=~".*upf1.*"}[1m])'
     result = query_prometheus(query, MONARCH_THANOS_URL)
+    #print(f"*** {MONARCH_THANOS_URL} : result is {result} ***")
     result = parse_numeric_value_from_prometheus_response(result)
+    #print(f"*** result is {result} ***")
     print(f"Current CPU usage for 'UPF1' pod is {result * 1000} millicores")
 
     ################ TASK 3: Compose Slice-Level KPIs ##############################

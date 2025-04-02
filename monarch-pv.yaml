@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: monarch-mongodb
+  labels:
+    app.kubernetes.io/name: mongodb
+spec:
+  capacity:
+    storage: 6Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /home/volumes/monarch-mongodb
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: monarch-minio
+  annotations:
+    meta.helm.sh/release-name: datastore
+    meta.helm.sh/release-namespace: monarch
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /home/volumes/monarch-minio
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: monarch-thanos
+  labels:
+    app.kubernetes.io/instance: datadist
+    app.kubernetes.io/name: thanos
+
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /home/volumes/monarch-thanos
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: monarch-thanos2
+  labels:
+    app.kubernetes.io/instance: datadist
+    app.kubernetes.io/name: thanos
+
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /home/volumes/monarch-thanos2
